@@ -4,8 +4,8 @@ Two configured uarts are required.
 
 Example:
 ```yaml
-uart_mitm:
-  uart1: uart1
-  uart2: uart2
+uart_mitm_uni:
+  uart_in: uart_in
+  uart_out: uart_out
 ```
 

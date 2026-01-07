@@ -7,15 +7,15 @@ DEPENDENCIES = ['uart']
 
 serial_ns = cg.esphome_ns.namespace('serial')
 
-UARTMITM = serial_ns.class_('UARTMITM', cg.Component)
+UARTMITMUNI = serial_ns.class_('UARTMITMUNI', cg.Component)
 
-CONF_UART1 = "uart1"
-CONF_UART2 = "uart2"
+CONF_UART_IN = "uart_in"
+CONF_UART_OUT = "uart_out"
 
 CONFIG_SCHEMA = cv.COMPONENT_SCHEMA.extend({
-    cv.GenerateID(): cv.declare_id(UARTMITM),
-    cv.Required(CONF_UART1): cv.use_id(uart.UARTComponent),
-    cv.Required(CONF_UART2): cv.use_id(uart.UARTComponent),
+    cv.GenerateID(): cv.declare_id(UARTMITMUNI),
+    cv.Required(CONF_UART_IN): cv.use_id(uart.UARTComponent),
+    cv.Required(CONF_UART_OUT): cv.use_id(uart.UARTComponent),
 })
 
 
@@ -23,7 +23,7 @@ async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
     await cg.register_component(var, config)
 
-    uart1 = await cg.get_variable(config[CONF_UART1])
-    cg.add(var.set_uart1(uart1))
-    uart2 = await cg.get_variable(config[CONF_UART2])
-    cg.add(var.set_uart2(uart2))
+    uart_in = await cg.get_variable(config[CONF_UART_IN])
+    cg.add(var.set_uart_in(uart_in))
+    uart_out = await cg.get_variable(config[CONF_UART_OUT])
+    cg.add(var.set_uart_out(uart_out))
